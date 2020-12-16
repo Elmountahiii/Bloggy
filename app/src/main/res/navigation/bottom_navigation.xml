@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/destination_home">
+
+    <fragment
+        android:id="@+id/destination_home"
+        android:name="com.redgunner.bloggy.view.fragments.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/destination_search"
+        android:name="com.redgunner.bloggy.view.fragments.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/destination_profile"
+        android:name="com.redgunner.bloggy.view.fragments.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/readingFragment"
+        android:name="com.redgunner.bloggy.view.fragments.ReadingFragment"
+        android:label="reading_fragment"
+        tools:layout="@layout/reading_fragment" >
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+    </fragment>
+    <action android:id="@+id/action_global_readingFragment" app:destination="@id/readingFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.redgunner.bloggy.view.fragments.HistoryFragment"
+        android:label="history_fragment"
+        tools:layout="@layout/history_fragment" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.redgunner.bloggy.view.fragments.SavedFragment"
+        android:label="saved_fragment"
+        tools:layout="@layout/saved_fragment" />
+</navigation>

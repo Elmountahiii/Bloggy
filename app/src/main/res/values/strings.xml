@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Bloggy</string>
+    <string name="profile">" Profile"</string>
+    <string name="latest_tricks">See more</string>
+    <string name="read_more">Read more :</string>
+    <string name="your_history">Your history :</string>
+    <string name="your_saved">Your saved :</string>
+    <string name="Search_Fragment_Title">Find what you are looking for :</string>
+    <string name="empty">Empty</string>
+    <string name="Try_agin">No data available</string>
+    <string name="try_again_button">Try again</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="SuggestArticle">For you :</string>
+    <string name="saved">Saved</string>
+    <string name="history">History</string>
+    <string name="NoInternet">No internet</string>
+    <string name="Error">Error</string>
+    <string name="RemoveFromSaved">Remove from saved</string>
+    <string name="NoResult">No results for :</string>
+    <string name="PleaseTry">Please try :</string>
+</resources>
