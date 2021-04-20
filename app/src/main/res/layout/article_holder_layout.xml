@@ -29,7 +29,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic" >
+
+                <tag android:id="@+id/zoomable" android:value="ZoomableViewTag" />
+
+
+            </ImageView>
+
 
         </androidx.cardview.widget.CardView>
 

@@ -74,7 +74,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 
@@ -86,6 +85,9 @@ dependencies {
     //kotlin coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+
+    //Pinch To Zoom
+    implementation 'com.aghajari.zoomhelper:ZoomHelper:1.0.2'
 
 
     //glide

@@ -69,7 +69,12 @@
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/ReadCategory"
-           tools:srcCompat="@tools:sample/backgrounds/scenic" />
+           tools:srcCompat="@tools:sample/backgrounds/scenic" >
+
+           <tag android:id="@+id/zoomable" android:value="ZoomableViewTag" />
+
+
+       </ImageView>
 
        <TextView
            android:id="@+id/ReadBody"
