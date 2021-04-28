@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.redgunner.bloggy.R
 import com.redgunner.bloggy.models.Article
+import com.redgunner.bloggy.utils.ArticleClickState
 import kotlinx.android.synthetic.main.article_holder_layout.view.*
 
 
 /*
 * RecyclerView Adapter
 * */
-class ArticleListAdapter(val articleClick: (articleId: Int, marlClick: Boolean, state: Boolean) -> Unit) :
+class ArticleListAdapter(val articleClick: (ArticleClickState) -> Unit) :
     ListAdapter<Article, ArticleListAdapter.ArticleViewHolder>(ArticleComparator()) {
 
 
@@ -32,6 +33,25 @@ class ArticleListAdapter(val articleClick: (articleId: Int, marlClick: Boolean, 
         private val bookMark = itemView.ArticleBookMark
 
 
+        init {
+
+            image.setOnClickListener {
+                articleClick(ArticleClickState.ReadClick(getItem(adapterPosition).id))
+
+            }
+
+            title.setOnClickListener {
+                articleClick(ArticleClickState.ReadClick(getItem(adapterPosition).id))
+
+            }
+
+            bookMark.setOnCheckedChangeListener { buttonView, isChecked ->
+                articleClick(ArticleClickState.MarkClick(getItem(adapterPosition).id,isChecked))
+
+            }
+        }
+
+
         fun bind(article: Article) {
 
             Glide.with(context)
@@ -43,19 +63,7 @@ class ArticleListAdapter(val articleClick: (articleId: Int, marlClick: Boolean, 
             time.text = article.date
             category.setTextColor(Color.parseColor(article.categoryColor))
 
-            image.setOnClickListener {
-                articleClick(getItem(adapterPosition).id, false, false)
 
-            }
-
-            title.setOnClickListener {
-                articleClick(getItem(adapterPosition).id, false, false)
-            }
-
-            bookMark.setOnCheckedChangeListener { buttonView, isChecked ->
-                Log.d("zbi", "ana botona chiwahad clickni")
-                articleClick(getItem(adapterPosition).id, true, isChecked)
-            }
 
         }
 

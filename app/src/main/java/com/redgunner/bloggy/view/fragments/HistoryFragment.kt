@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.redgunner.bloggy.R
 import com.redgunner.bloggy.adapter.ArticleListAdapter
+import com.redgunner.bloggy.utils.ArticleClickState
 import com.redgunner.bloggy.viewmodels.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.history_fragment.*
@@ -19,14 +20,20 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
 
     private val viewModel: HistoryViewModel by viewModels()
 
-    private val historyListAdapter = ArticleListAdapter { articleId, markClick, state ->
+    private val historyListAdapter = ArticleListAdapter {articleClickState ->
 
-        if (markClick) {
+        when(articleClickState){
+            is ArticleClickState.ReadClick ->{
 
-            viewModel.markArticle(articleId,state)
+                findNavController().navigate(HistoryFragmentDirections.actionGlobalReadingFragment( articleClickState.ArticleId))
 
-        }else{
-            findNavController().navigate(HistoryFragmentDirections.actionGlobalReadingFragment(articleId))
+
+
+            }
+            is ArticleClickState.MarkClick ->{
+                viewModel.markArticle(articleClickState.ArticleId, articleClickState.CheckedState)
+            }
+
         }
 
     }

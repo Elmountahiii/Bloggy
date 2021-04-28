@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.redgunner.bloggy.R
 import com.redgunner.bloggy.adapter.ArticleListAdapter
+import com.redgunner.bloggy.utils.ArticleClickState
 import com.redgunner.bloggy.viewmodels.SavedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.saved_fragment.*
@@ -19,13 +20,21 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
 
     private val viewModel:SavedViewModel by viewModels ()
 
-    private val savedListAdapter=ArticleListAdapter{ articleId, markClick, state ->
+    private val savedListAdapter=ArticleListAdapter{articleClickState ->
 
-        if (markClick) {
-            viewModel.markArticle(articleId,state)
+        when(articleClickState){
+            is ArticleClickState.ReadClick ->{
 
-        }else{
-            findNavController().navigate(SavedFragmentDirections.actionGlobalReadingFragment(articleId))
+
+                findNavController().navigate(SavedFragmentDirections.actionGlobalReadingFragment( articleClickState.ArticleId))
+
+
+
+            }
+            is ArticleClickState.MarkClick ->{
+                viewModel.markArticle(articleClickState.ArticleId, articleClickState.CheckedState)
+            }
+
         }
 
     }

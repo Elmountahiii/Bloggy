@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redgunner.bloggy.R
 import com.redgunner.bloggy.adapter.ArticleListAdapter
+import com.redgunner.bloggy.utils.ArticleClickState
 import com.redgunner.bloggy.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.search_fragment.*
@@ -23,12 +24,23 @@ class SearchFragment : Fragment(R.layout.search_fragment){
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private val articleListAdapter = ArticleListAdapter{ articleId, marlClick, state ->
+    private val articleListAdapter = ArticleListAdapter{articleClickState ->
 
-        if (marlClick) {
-            viewModel.markArticle(articleId,state)
-        }else{
-            findNavController().navigate(SearchFragmentDirections.actionGlobalReadingFragment(articleId))
+        when(articleClickState){
+            is ArticleClickState.ReadClick ->{
+
+
+                findNavController().navigate(SearchFragmentDirections.actionGlobalReadingFragment(articleClickState.ArticleId))
+
+
+
+
+
+            }
+            is ArticleClickState.MarkClick ->{
+                viewModel.markArticle(articleClickState.ArticleId, articleClickState.CheckedState)
+            }
+
         }
 
     }

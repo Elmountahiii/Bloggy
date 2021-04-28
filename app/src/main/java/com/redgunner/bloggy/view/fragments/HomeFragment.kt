@@ -13,6 +13,7 @@ import com.redgunner.bloggy.R
 import com.redgunner.bloggy.adapter.ArticleListAdapter
 import com.redgunner.bloggy.models.Article
 import com.redgunner.bloggy.models.Category
+import com.redgunner.bloggy.utils.ArticleClickState
 import com.redgunner.bloggy.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -23,17 +24,22 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private val articleListAdapter = ArticleListAdapter { articleId, markClick, state ->
+    private val articleListAdapter = ArticleListAdapter {articleClickState ->
 
-        if (markClick) {
-            viewModel.markArticle(articleId, state)
-        } else {
+    when(articleClickState){
+        is ArticleClickState.ReadClick ->{
             findNavController().navigate(
                 HomeFragmentDirections.actionGlobalReadingFragment(
-                    articleId
+                   articleClickState.ArticleId
                 )
             )
+
         }
+        is ArticleClickState.MarkClick ->{
+            viewModel.markArticle(articleClickState.ArticleId, articleClickState.CheckedState)
+        }
+
+    }
 
     }
 

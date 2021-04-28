@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.redgunner.bloggy.R
 import com.redgunner.bloggy.adapter.ArticleListAdapter
 import com.redgunner.bloggy.models.Article
+import com.redgunner.bloggy.utils.ArticleClickState
 import com.redgunner.bloggy.viewmodels.ReadingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.reading_fragment.*
@@ -22,16 +23,24 @@ class ReadingFragment : Fragment(R.layout.reading_fragment) {
 
     private val viewModel: ReadingViewModel by viewModels()
 
-    private val similarListAdapter = ArticleListAdapter { articleId, marlClick, state ->
+    private val similarListAdapter = ArticleListAdapter {articleClickState ->
 
-        if (marlClick) {
-            viewModel.markArticle(articleId, state)
-        } else {
-            findNavController().navigate(
-                ReadingFragmentDirections.actionGlobalReadingFragment(
-                    articleId
+        when(articleClickState){
+            is ArticleClickState.ReadClick ->{
+                findNavController().navigate(
+                    ReadingFragmentDirections.actionGlobalReadingFragment(
+                        articleClickState.ArticleId
+                    )
                 )
-            )
+
+
+
+
+            }
+            is ArticleClickState.MarkClick ->{
+                viewModel.markArticle(articleClickState.ArticleId, articleClickState.CheckedState)
+            }
+
         }
 
     }
